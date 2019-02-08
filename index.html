@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Destination Planner</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Megrim|Montserrat:400,600|Raleway:400,700" rel="stylesheet">
+    <link href="index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <main role=main>
+        <div>
+            <header class="row" role="banner">
+                <h1 class="logo">Destination Planner</h1>
+                <p class="api-info">Powered by OpenLayers and YouTube API</p>
+                <p>Get the latest on where to eat, visit, and play in any city worldwide!</p>
+            </header>
+
+            <form>
+                <input type="text" placeholder="Enter a city" class="search-query" id="search-term" required>
+                <button type="submit" class="submit-button">Search</button>
+            </form>
+        </div>
+
+        <nav role="navigation" class="navigation hide" id="results-navigation">
+            <div class="options row">
+                <button class="category-button" id="food-button">FOOD</button>
+                <button class="category-button" id="nightlife-button">NIGHTLIFE</button>
+                <button class="category-button" id="shops-button">SHOPS</button>
+                <button class="category-button" id="outdoors-button">OUTDOORS</button>
+                <button class="category-button" id="entertainment-button">ARTS</button>
+            </div>
+        </nav>
+
+        <section class="results">
+
+        </section>
+
+        <footer class="footer">
+            <a href="" target="_blank"><img src="social-icons/github-icon-80.png" alt="github icon"></a>;
+            <a href="" target="_blank"><img src="social-icons/linkedin-icon-80.png" alt="linkedin icon"></a>;
+            <a href="mailto:kayla.meiklejohn@gmail.com"><img src="social-icons/mail-icon-80.png" alt="email icon"></a>
+            <p>Created by Kayla Meiklejohn</p>
+        </footer>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYwwQ-wTWZ6jI75jcsRz4if7dv30i5evo&libraries=places&callback=activatePlacesSearch"></script>
+</body>
+</html>
