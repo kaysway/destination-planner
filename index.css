@@ -1,7 +1,6 @@
 body {
-    font-family: 'Roboto', sans-serif;
     text-align: center;
-    /* background: url(""); */
+    background-image: url("./images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -10,25 +9,25 @@ body {
     padding: 0px;
 }
 
-.hide {
-    display: none;
+/*START DISPLAY*/
+
+#mapid {
+    height: 200px;
+    width: 200px;
+  }
+
+h2 {
+    color: rgb(115, 43, 138);
+    font-size: 24px;
 }
-
-a {
-    text-decoration: none;
-    color: steelblue;
-}
-
-
-/*****START DISPLAY*****/
 
 header p {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 header p.api-info {
-    color: steelblue;
-    font-size: 12px;
+    color: rgb(115, 43, 138);
+    font-size: 14px;
 }
 
 header {
@@ -38,20 +37,16 @@ header {
     width: 80%
 }
 
-.start-display {
+.startDisplay {
     height: 100vh;
-    background: url("./images/roads.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     box-shadow: 0 0 10px black;
-    padding-top: 200px;
+    padding-top: 100px;
     margin-bottom: 45px;
 }
 
 h1.logo {
-    font-family: 'Megrim', sans-serif;
-    font-size: 60px;
+    font-size: 50px;
     margin-bottom: 15px;
 }
 
@@ -70,7 +65,7 @@ form input {
 form button {
     height: 50px;
     width: 100px;
-    background: #eee;
+    background: white;
     border: 0px;
     border-radius: 5px;
     margin-left: 10px;
@@ -78,111 +73,7 @@ form button {
     font-size: 20px;
 }
 
-form a {
-    color: black;
-    text-decoration: none;
-}
-
-
-/***** WEATHER DISPLAY *****/
-
-.weather-results {
-    padding: 10px;
-    margin: 30px 0;
-    text-align: center;
-}
-
-.weather-results h1 {
-    font-size: 40px;
-    color: black;
-    font-family: 'Megrim', sans-serif;
-}
-
-.weather-image {
-    width: 50%;
-}
-
-.weather-results {
-    margin: 10px;
-    padding: 10px;
-    width: 100%;
-    background: rgba(230, 223, 223, 0.7);
-    border-radius: 5px;
-}
-
-
-/***** NAVIGATION *****/
-
-nav {
-    margin: 20px 0;
-}
-
-button.category-button {
-    margin: 5px;
-    padding: 10px;
-    background: #fff;
-    border: 0px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px black;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-}
-
-button.selected {
-    background: #ccc;
-}
-
-
-/***** RESULT DISPLAY *****/
-
-div .result-image {
-    width: 100%;
-    float: left;
-    height: 15em;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    background-size: cover;
-    background-position: center center;
-}
-
-.col-3,
-.result {
-    margin: 10px;
-    padding: 10px;
-    width: 100%;
-    background: rgba(230, 223, 223, 0.7);
-    border-radius: 5px;
-}
-
-.result-description {
-    padding: 10px;
-    text-align: justify;
-    overflow: hidden;
-    font-size: 0.9em;
-}
-
-.result-description h2 {
-    font-size: 1.3em;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    ;
-}
-
-#foursquare-results span {
-    display: inline-block;
-    height: 32px;
-    padding: 0;
-    vertical-align: top;
-    background-color: #ccc;
-    border-radius: 5px;
-}
-
-#foursquare-results span.icon-text {
-    padding: 8px 4px 0 4px;
-}
-
-
-/***** FOOTER *****/
+/* FOOTER */
 
 footer {
     background-color: rgba(255, 255, 255, 0.7);
@@ -193,10 +84,11 @@ footer {
 }
 
 
-/***** RESPONSIVE DESIGN *****/
+/* RESPONSIVE DESIGN */
 
 * {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 .row {

@@ -5,48 +5,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Destination Planner</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Megrim|Montserrat:400,600|Raleway:400,700" rel="stylesheet">
-    <link href="index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="crossorigin=""/>
+    <link href="index.css" rel="stylesheet"/>
 </head>
 
 <body>
-    <main role=main>
-        <div>
-            <header class="row" role="banner">
-                <h1 class="logo">Destination Planner</h1>
-                <p class="api-info">Powered by OpenLayers and YouTube API</p>
-                <p>Get the latest on where to eat, visit, and play in any city worldwide!</p>
-            </header>
 
-            <form>
-                <input type="text" placeholder="Enter a city" class="search-query" id="search-term" required>
-                <button type="submit" class="submit-button">Search</button>
-            </form>
-        </div>
+    <div class="startDisplay">
+        <header class="row" role="banner">
+            <h1 class="logo">Destination Planner</h1>
+            <p class="api-info">Powered by OpenLayers and YouTube API</p>
+            <h2>Get the latest on where to eat, visit, and play in any city worldwide!</h2>
+        </header>
 
-        <nav role="navigation" class="navigation hide" id="results-navigation">
-            <div class="options row">
-                <button class="category-button" id="food-button">FOOD</button>
-                <button class="category-button" id="nightlife-button">NIGHTLIFE</button>
-                <button class="category-button" id="shops-button">SHOPS</button>
-                <button class="category-button" id="outdoors-button">OUTDOORS</button>
-                <button class="category-button" id="entertainment-button">ARTS</button>
-            </div>
-        </nav>
+        <form>
+            <input type="text" placeholder="Enter a city" class="search-query" id="search-term" required>
+            <button type="submit" class="submit-button">Search</button>
+        </form>
+    </div>
 
-        <section class="results">
+    <h2>Where to Next?</h2>
 
-        </section>
+    <div id="mapid">
+    </div>
+
+        <section class="results"></section>
 
         <footer class="footer">
-            <a href="" target="_blank"><img src="social-icons/github-icon-80.png" alt="github icon"></a>;
-            <a href="" target="_blank"><img src="social-icons/linkedin-icon-80.png" alt="linkedin icon"></a>;
-            <a href="mailto:kayla.meiklejohn@gmail.com"><img src="social-icons/mail-icon-80.png" alt="email icon"></a>
+            <a href="https://github.com/kaysway" target="_blank"><img src="./images/github.png" alt="github icon"></a>
+            <a href="https://www.linkedin.com/in/kaylameiklejohn/" target="_blank"><img src="./images/linkedin.png" alt="linkedin icon"></a>
+            <a href="mailto:kayla.meiklejohn@gmail.com"><img src="./images/mail.png" alt="email icon"></a>
             <p>Created by Kayla Meiklejohn</p>
         </footer>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYwwQ-wTWZ6jI75jcsRz4if7dv30i5evo&libraries=places&callback=activatePlacesSearch"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="crossorigin=""></script>
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYwwQ-wTWZ6jI75jcsRz4if7dv30i5evo&libraries=places&callback=activatePlacesSearch"></script>
 </body>
 </html>
