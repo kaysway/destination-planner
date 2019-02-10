@@ -11,13 +11,15 @@ body {
 
 /*START DISPLAY*/
 
-#mapid {
-    height: 200px;
-    width: 200px;
-  }
+.startDisplay {
+    height: 85vh;
+    box-shadow: 0 0 10px black;
+    padding-top: 100px;
+    margin-bottom: 15px;
+}
 
 h2 {
-    color: rgb(115, 43, 138);
+    color: rgb(109, 27, 218);
     font-size: 24px;
 }
 
@@ -37,17 +39,10 @@ header {
     width: 80%
 }
 
-.startDisplay {
-    height: 100vh;
-    background-size: cover;
-    box-shadow: 0 0 10px black;
-    padding-top: 100px;
-    margin-bottom: 45px;
-}
+
 
 h1.logo {
     font-size: 50px;
-    margin-bottom: 15px;
 }
 
 form {
@@ -72,6 +67,12 @@ form button {
     box-shadow: 0 0 5px black;
     font-size: 20px;
 }
+
+#mapid {
+    height: 400px;
+    width: 700px;
+    margin: 0 auto;
+  }
 
 /* FOOTER */
 
