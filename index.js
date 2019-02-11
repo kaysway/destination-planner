@@ -9,18 +9,21 @@ let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweX
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
-    accessToken: 'your.mapbox.access.token'
-}).addTo(mymap);
+    accessToken: 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweXk3In0.Xesc_eMjC872n1L4hqNbpw'
+}).addTo(mapid);
 
 
-// function 2: retrieve data from leaflet API on Submit click and return location results
-
-function getWeatherData() {
-    let city = $('.search-query').val();
-     
+//function 2: On Search button click, hide the startDisplay div and reveal the results div
+function getCityData() {
+  let city = $('.search-query').val();
+   
 }
 
-// function 3: Retrieve Data from YouTube API
+
+// function 3: fetch location data from leaflet/mapbox API on click and return location results on map and in an alert popup for the user to click on
+
+
+// function 4: Fetch Data from the YouTube API to display iFrame embedded video in results div
 
 function callYoutubeAPI(valueSelected){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${valueSelected}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
