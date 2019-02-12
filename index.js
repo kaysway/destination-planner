@@ -1,7 +1,7 @@
 let youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
 let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweXk3In0.Xesc_eMjC872n1L4hqNbpw'
 
-  // function 1: add map to start screen when page loads
+  // function 1: add map from leaflet to start screen when page loads
 
   function createMap(position) {
     let lat = position.coords.latitude;
@@ -16,23 +16,31 @@ let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweX
     }).addTo(myMap);
   }
 
+  //function 2: Get user's current location and display on map
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(createMap);
     }  
    }
 
-//function 2: On Search button click, hide the startDisplay div and reveal the results div
-function getCityData() {
+
+//function 3: On Search button click, scroll page down to map
+$('html,body').animate({
+  scrollTop: $("#mapid").offset().top
+});
+
+
+//function 4: display location value from input as popup on map using leafletjs
+function displayCity() {
   let city = $('.search-query').val();
    
 }
 
 
-// function 3: fetch location data from leaflet/mapbox API on click and return location results on map and in an alert popup for the user to click on
+// function 4: fetch location data from leaflet/mapbox API on click and return location results on map and in an alert popup for the user to click on
 
 
-// function 4: Fetch Data from the YouTube API to display iFrame embedded video in results div
+// function 5: Fetch Data from the YouTube API to display iFrame embedded video in results div
 
 function callYoutubeAPI(valueSelected){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${valueSelected}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
