@@ -24,23 +24,38 @@ let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweX
    }
 
 
-//function 3: On Search button click, scroll page down to map
-$('html,body').animate({
-  scrollTop: $("#mapid").offset().top
-});
+//function 3/4: On Search button click, scroll page to map and display location value from input as popup on map using leafletjs
+
+  function scrollPage () {
+    $('#search-term').on('click', '.submit-button',
+     function (event) {
+      $('html,body').animate({
+        scrollTop: $("#mapid").offset().top
+      });
+    })
+  }
+
+  let popup = L.popup();
+
+  function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(mymap);
+  }
+
+  mymap.on('click', onMapClick);
+  
+    function displayLocation () {
+      marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup(); 
+  }
+  
 
 
-//function 4: display location value from input as popup on map using leafletjs
-function displayCity() {
-  let city = $('.search-query').val();
-   
-}
+// function 5: fetch location data from leaflet/mapbox API on click and return location results on map and in an alert popup for the user to click on
 
 
-// function 4: fetch location data from leaflet/mapbox API on click and return location results on map and in an alert popup for the user to click on
-
-
-// function 5: Fetch Data from the YouTube API to display iFrame embedded video in results div
+// function 6: Fetch Data from the YouTube API to display iFrame embedded video in results div
 
 function callYoutubeAPI(valueSelected){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${valueSelected}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
