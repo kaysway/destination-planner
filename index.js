@@ -1,5 +1,11 @@
+'use strict'
+
 let youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
 let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweXk3In0.Xesc_eMjC872n1L4hqNbpw'
+const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
+let lat = [];
+let lng = [];
+
 
   // function 1: add map from leaflet to start screen when page loads
 
@@ -35,20 +41,21 @@ let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweX
     })
   }
 
-  let popup = L.popup();
+  function watchSearch() {
+    $('#search-term').submit(function(event) {
+      event.preventDefault();
+    let query = { 
+      key: Aa9wTkNOi7A4raCxp3bebhWhLL1uAvny,
+      location: $('#search-term').val()
+    }
 
-  function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(mymap);
-  }
-
-  mymap.on('click', onMapClick);
-  
-    function displayLocation () {
-      marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup(); 
-  }
+    $.getJSON(GEO_SEARCH_URL, query, function(data) {
+        lat = data.results[0].locations[0].latLng.lat;
+        lng = data.results[0].locations[0].latLng.lng;
+        $('#geo-code').val('')
+    });
+  })
+}
   
 
 
