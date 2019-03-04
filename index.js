@@ -1,68 +1,95 @@
 'use strict'
 
-let youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
-let accessToken = 'pk.eyJ1Ijoia2F5c3dheSIsImEiOiJjanJ6ZHZveTUxN3hwNGJvNDFwaHhweXk3In0.Xesc_eMjC872n1L4hqNbpw'
+const youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
+
 let lat = [];
 let lng = [];
 
+//INCOMPLETE-----display map on start screen when page loads
+  function createMap(data) {
+    L.mapquest.key = 'Aa9wTkNOi7A4raCxp3bebhWhLL1uAvny';
 
-  // function 1: add map from leaflet to start screen when page loads
+    let map = L.mapquest.map('map', {
+      center: ([lat, lng]),
+      layers: L.mapquest.tileLayer('map'),
+      zoom: 11
+    });
+    
+    // map.addControl(L.mapquest.control());
+    // pinLocation(map);
+    // populateMap(data, map);
+}
+  
+//GOOD-----Get user's current location and display on map
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(createMap);
+  }  
+ }
 
-  function createMap(position) {
-    let lat = position.coords.latitude;
-    let long = position.coords.longitude;
-    let myMap = L.map('mapid').setView([lat, long], 13);
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: accessToken
-    }).addTo(myMap);
-  }
-
-  //function 2: Get user's current location and display on map
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(createMap);
-    }  
-   }
-
-
-//function 3/4: On Search button click, scroll page to map and display location value from input as popup on map using leafletjs
-
-  function scrollPage () {
-    $('#search-term').on('click', '.submit-button',
-     function (event) {
-      $('html,body').animate({
-        scrollTop: $("#mapid").offset().top
-      });
-    })
-  }
-
-  function watchSearch() {
-    $('#search-term').submit(function(event) {
-      event.preventDefault();
+//GOOD-----On Search button click, scroll page to map 
+function watchSearch() {
+  $('#search-form').submit(function(event) {
+    event.preventDefault();
+    $('html,body').animate({scrollTop: $("#map").offset().top});
+    
     let query = { 
-      key: Aa9wTkNOi7A4raCxp3bebhWhLL1uAvny,
+      key: 'Aa9wTkNOi7A4raCxp3bebhWhLL1uAvny',
       location: $('#search-term').val()
     }
 
-    $.getJSON(GEO_SEARCH_URL, query, function(data) {
-        lat = data.results[0].locations[0].latLng.lat;
-        lng = data.results[0].locations[0].latLng.lng;
-        $('#geo-code').val('')
-    });
+  $.getJSON(GEO_SEARCH_URL, query, function(data) {
+      lat = data.results[0].locations[0].latLng.lat;
+      lng = data.results[0].locations[0].latLng.lng;
+      $('#search-term').val('')
+  });
   })
+  watchSearch();
+} 
+
+// GOOD----Show your location on the map
+function pinLocation(map) {
+  L.mapquest.textMarker([lat, lng], {
+      text: 'You are here',
+      type: 'marker',
+      position: 'bottom',
+      alt: 'You are here',
+      icon: {
+          primaryColor: 'black',
+          secondaryColor: 'black',
+          size: 'sm',
+      },
+  }).addTo(map);
+  $('#map').trigger('resize');
 }
-  
 
+// INCOMPLTE----This will populate the results on the map
+// function populateMap(data, map) {
+//   data.city.forEach(city => {
+//       let lati = city.coordinates.latitude;
+//       let long = city.coordinates.longitude;
+//       L.mapquest.textMarker([lati, long], {
+//           text: city.name,
+//           type: 'marker',
+//           position: 'bottom',
+//           alt: city.name + 'Learn more about' + city.name + 'on YouTube',
+//           icon: {
+//               primaryColor: '#ffffff',
+//               secondaryColor: '#333333',
+//               size: 'md',
+//           },
+//       }).bindPopup(`${city.name} <br><a target='_blank' aria-label='Read more about ${city.name} on YouTube' href=${city.url}>YouTube</a>`).openPopup().addTo(map);
+//   });
+//   watchSearch();  
+// };
 
-// function 5: fetch location data from leaflet/mapbox API on click and return location results on map and in an alert popup for the user to click on
-
-
-// function 6: Fetch Data from the YouTube API to display iFrame embedded video in results div
+// INCOMPLETE------Push location to YouTube
+function showPosition(position) {
+  lat = position.coords.latitude;
+  lng = position.coords.longitude;
+  callYouTubeAPI();
+}
 
 function callYoutubeAPI(valueSelected){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${valueSelected}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
@@ -73,6 +100,40 @@ function callYoutubeAPI(valueSelected){
     })
     .catch(error =>
       console.log(error))
-  }
+  } 
 
-  $(getLocation());
+//Loads the IFrame Player API code asyncrhonously
+  let tag = document.createElement('script');
+  
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// This function creates an <iframe> (and YouTube player) after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+// The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+//call listeners
+function initializePage (){
+  getLocation();
+  watchSearch();
+  createMap();
+}
+
+$(initializePage());
+
+

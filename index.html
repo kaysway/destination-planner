@@ -15,11 +15,11 @@
     <div class="startDisplay">
         <header class="row" role="banner">
             <h1 class="logo">Destination Planner</h1>
-            <p class="api-info">Powered by Leaflet and YouTube API</p>
+            <p class="api-info">Powered by Mapquest and YouTube API</p>
             <h2>Get the latest on which restaurants to visit in any city</h2>
         </header>
 
-        <form>
+        <form id="search-form">
             <input type="text" placeholder="Enter a city" class="search-query" id="search-term" required>
             <button type="submit" class="submit-button">Search</button>
         </form>
@@ -29,21 +29,23 @@
      <h2>Where to Next?</h2>
     </div>
 
-    <div id="mapid">
+    <div id="map">
     </div>
 
-        <section class="results"></section>
+    <section class="results">
+        <div id="player"></div>
+    </section>
 
-        <footer class="footer">
-            <a href="https://github.com/kaysway" target="_blank"><img src="./images/github.png" alt="github icon"></a>
-            <a href="https://www.linkedin.com/in/kaylameiklejohn/" target="_blank"><img src="./images/linkedin.png" alt="linkedin icon"></a>
-            <a href="mailto:kayla.meiklejohn@gmail.com"><img src="./images/mail.png" alt="email icon"></a>
-            <p>Created by Kayla Meiklejohn</p>
-        </footer>
+    <footer class="footer">
+        <a href="https://github.com/kaysway" target="_blank"><img src="./images/github.png" alt="github icon"></a>
+        <a href="https://www.linkedin.com/in/kaylameiklejohn/" target="_blank"><img src="./images/linkedin.png" alt="linkedin icon"></a>
+        <a href="mailto:kayla.meiklejohn@gmail.com"><img src="./images/mail.png" alt="email icon"></a>
+        <p>Created by Kayla Meiklejohn</p>
+    </footer>
     </main>
+    
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="index.js"></script>
-   
    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYwwQ-wTWZ6jI75jcsRz4if7dv30i5evo&libraries=places&callback=activatePlacesSearch"></script>
 </body>
 </html>

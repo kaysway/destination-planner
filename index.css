@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     text-align: center;
     background-image: url("./images/background.jpg");
@@ -61,9 +67,6 @@ form input {
     padding: 10px;
     border-radius: 5px;
     border: 0px;
-}
-
-form input {
     box-shadow: 0 0 10px black;
 }
 
@@ -78,7 +81,7 @@ form button {
     font-size: 20px;
 }
 
-#mapid {
+#map {
     height: 400px;
     width: 700px;
     margin: 0 auto;
