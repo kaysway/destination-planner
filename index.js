@@ -3,19 +3,21 @@
 const youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
 
+//declaring lat and lng so they aren't undefined in pinLocation function
+let lat = [];
+let lng = [];
+
 
 //INCOMPLETE-----display map on start screen when page loads
   function createMap(position) {
     L.map('map', {
       center: ([position.coords.latitude, position.coords.longitude]),
       layers: MQ.mapLayer(),
-      // layers: L.mapquest.tileLayer('map'),
       zoom: 11
     });
     
     // map.addControl(L.mapquest.control());
-    // pinLocation(map);
-    // populateMap(data, map);
+    pinLocation(map);
 }
   
 //GOOD-----Get user's current location and display on map
@@ -33,20 +35,20 @@ function watchSearch() {
     
     let query = { 
       key: 'R0OL2YLpWtAiZpcpqDU6MPkjAu58HLOp',
-      location: $('#search-term').val()
+      location: $('#search-term').val(),
     }
 
-  $.getJSON(GEO_SEARCH_URL, query, function(data) {
+    $.getJSON(GEO_SEARCH_URL, query, function(data) {
       lat = data.results[0].locations[0].latLng.lat;
       lng = data.results[0].locations[0].latLng.lng;
       $('#search-term').val('')
-  });
+    });
   })
 } 
 
-// GOOD----Show your location on the map
+// GOOD----Pin your location on the map
 function pinLocation(map) {
-  L.mapquest.textMarker([lat, lng], {
+  L.mapquest.marker([lat, lng], {
       text: 'You are here',
       type: 'marker',
       position: 'bottom',
@@ -57,7 +59,6 @@ function pinLocation(map) {
           size: 'sm',
       },
   }).addTo(map);
-  $('#map').trigger('resize');
 }
 
 // INCOMPLTE----This will populate the results on the map
@@ -123,10 +124,11 @@ function pinLocation(map) {
   // function onPlayerReady(event) {
   //   event.target.playVideo();
   // }
+  
 //call listeners
 function initializePage (){
   getLocation();
-  // watchSearch();
+  watchSearch();
 }
 
 $(initializePage());
