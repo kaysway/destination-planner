@@ -3,20 +3,15 @@
 const youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
 
-//declaring lat and lng so they aren't undefined in pinLocation function
-// let lat = [];
-// let lng = [];
 let map;
 
-//INCOMPLETE-----display map on start screen when page loads
+//GOOD-----display map on start screen when page loads
   function createMap(position) {
    map = L.map('map', {
       center: ([position.coords.latitude, position.coords.longitude]),
       layers: MQ.mapLayer(),
       zoom: 11
-    });
-    
-    // map.addControl(L.mapquest.control());
+    });    
     pinLocation(position.coords.latitude, position.coords.longitude);
 }
   
@@ -49,27 +44,15 @@ function watchSearch() {
 
 // GOOD----Pin your location on the map
 function pinLocation(lat, lng) {
-  // L.marker('map', {
-  //     text: 'You are here',
-  //     type: 'marker',
-  //     location: [lat, lng],
-  //     position: 'bottom',
-  //     alt: 'You are here',
-  //     icon: {
-  //         primaryColor: 'black',
-  //         secondaryColor: 'black',
-  //         size: 'sm',
-  //     },
-  // }).addTo(map);
   L.marker([lat, lng]).addTo(map);
 }
 
 // INCOMPLTE----This will populate the results on the map
 // function populateMap(data, map) {
-//   data.city.forEach(city => {
-//       let lati = city.coordinates.latitude;
-//       let long = city.coordinates.longitude;
-//       L.mapquest.textMarker([lati, long], {
+//   data.results.providedLocation.location.forEach(location => {
+//   let lat = data.results[0].locations[0].latLng.lat;
+//   let lng = data.results[0].locations[0].latLng.lng;
+//       L.mapquest.textMarker([lat, long], {
 //           text: city.name,
 //           type: 'marker',
 //           position: 'bottom',
@@ -84,23 +67,17 @@ function pinLocation(lat, lng) {
 //   watchSearch();  
 // };
 
-// INCOMPLETE------Push location to YouTube
-// function showPosition(position) {
-//   lat = position.coords.latitude;
-//   lng = position.coords.longitude;
-  // callYouTubeAPI();
-// }
 
-// function callYoutubeAPI(valueSelected){
-//     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${valueSelected}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
-//     .then(youtubeResult =>
-//       youtubeResult.json())
-//     .then(youtubeResult => {
-//       displayOtherResults(youtubeResult.items[0]);
-//     })
-//     .catch(error =>
-//       console.log(error))
-//   } 
+function callYoutubeAPI(location){
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${location}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
+    .then(youtubeResult =>
+      youtubeResult.json())
+    .then(youtubeResult => {
+      displayOtherResults(youtubeResult.items[0]);
+    })
+    .catch(error =>
+      console.log(error))
+  } 
 
 //Loads the IFrame Player API code asyncrhonously
   // let tag = document.createElement('script');
@@ -132,8 +109,7 @@ function pinLocation(lat, lng) {
 function initializePage (){
   getLocation();
   watchSearch();
+  callYoutubeAPI();
 }
 
 $(initializePage());
-
-
