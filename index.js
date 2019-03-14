@@ -1,6 +1,6 @@
 'use strict'
 
-const youtube_Key = "08657a242a7a81b59e5d79081c3812a9a7bfa260"
+const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
 
 let map;
@@ -12,7 +12,7 @@ let map;
       layers: MQ.mapLayer(),
       zoom: 11
     });    
-    pinLocation(position.coords.latitude, position.coords.longitude);
+    populateMap(position.coords.latitude, position.coords.longitude);
 }
   
 //GOOD-----Get user's current location and display on map
@@ -36,48 +36,35 @@ function watchSearch() {
     $.getJSON(GEO_SEARCH_URL, query, function(data) {
       let lat = data.results[0].locations[0].latLng.lat;
       let lng = data.results[0].locations[0].latLng.lng;
-      pinLocation(lat, lng);
+      populateMap(lat, lng);
       $('#search-term').val('')
     });
   })
-} 
-
-// GOOD----Pin your location on the map
-function pinLocation(lat, lng) {
-  L.marker([lat, lng]).addTo(map);
 }
 
-// INCOMPLTE----This will populate the results on the map
-// function populateMap(data, map) {
-//   data.results.providedLocation.location.forEach(location => {
-//   let lat = data.results[0].locations[0].latLng.lat;
-//   let lng = data.results[0].locations[0].latLng.lng;
-//       L.mapquest.textMarker([lat, long], {
-//           text: city.name,
-//           type: 'marker',
-//           position: 'bottom',
-//           alt: city.name + 'Learn more about' + city.name + 'on YouTube',
-//           icon: {
-//               primaryColor: '#ffffff',
-//               secondaryColor: '#333333',
-//               size: 'md',
-//           },
-//       }).bindPopup(`${city.name} <br><a target='_blank' aria-label='Read more about ${city.name} on YouTube' href=${city.url}>YouTube</a>`).openPopup().addTo(map);
-//   });
-//   watchSearch();  
-// };
+// INCOMPLTE----This will populate the results on the map and add markers
+function populateMap(item) {
+  data.results.forEach(item => {
+      L.marker([lat, lng], {
+          text: item.providedLocation.location,
+          type: 'marker',
+          position: 'bottom',
+          alt: city.name + 'Learn more about' + location.name + 'on YouTube',
+          icon: {
+              primaryColor: '#ffffff',
+              secondaryColor: '#333333',
+              size: 'md',
+          },
+      }).bindPopup(`${location.name} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${location.name}</span> on YouTube' href=${location.url}>YouTube</a>`).openPopup().addTo(map);
+  });
+};
 
 
 function callYoutubeAPI(location){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${location}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
     .then(youtubeResult =>
       youtubeResult.json())
-    .then(youtubeResult => {
-      displayOtherResults(youtubeResult.items[0]);
-    })
-    .catch(error =>
-      console.log(error))
-  } 
+    };
 
 //Loads the IFrame Player API code asyncrhonously
   // let tag = document.createElement('script');
