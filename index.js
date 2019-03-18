@@ -4,6 +4,7 @@ const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
 
 let map;
+let results;
 
 //GOOD-----display map on start screen when page loads
   function createMap(position) {
@@ -36,29 +37,46 @@ function watchSearch() {
     $.getJSON(GEO_SEARCH_URL, query, function(data) {
       let lat = data.results[0].locations[0].latLng.lat;
       let lng = data.results[0].locations[0].latLng.lng;
-      populateMap(lat, lng);
+      //call YouTube API here so the map results populate with marker from populateMap function below and a link to the YouTube search results
+      callYoutubeAPI()
+      data.results.forEach(result => {
+        result.locations.forEach(location => {populateMap(location, result.providedLocation.location)});
+      });
       $('#search-term').val('')
     });
   })
 }
 
 // INCOMPLTE----This will populate the results on the map and add markers
-function populateMap(item) {
-  data.results.forEach(item => {
-      L.marker([lat, lng], {
-          text: item.providedLocation.location,
+function populateMap(location, locationText) {
+  // results.forEach(item => {
+      L.marker([location.latLng.lat, location.latLng.lng], {
+          text: locationText,
           type: 'marker',
           position: 'bottom',
-          alt: city.name + 'Learn more about' + location.name + 'on YouTube',
+          alt: locationText + 'Learn more about' + locationText + 'on YouTube',
           icon: {
               primaryColor: '#ffffff',
               secondaryColor: '#333333',
               size: 'md',
           },
-      }).bindPopup(`${location.name} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${location.name}</span> on YouTube' href=${location.url}>YouTube</a>`).openPopup().addTo(map);
-  });
+      }).bindPopup(`${locationText} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${locationText}</span> on YouTube' href=${location.url}>YouTube</a>`).openPopup().addTo(map);
+  // });
 };
 
+//create a function that includes an event handler that passes locationText to call Youtube API
+function populateMapWithoutPopup(lat, lng) {
+  L.marker([lat, lng], {
+    text: 'Current Location',
+    type: 'marker',
+    position: 'bottom',
+    icon: {
+        primaryColor: '#ffffff',
+        secondaryColor: '#333333',
+        size: 'md',
+    },
+})
+}
 
 function callYoutubeAPI(location){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${location}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
@@ -93,7 +111,7 @@ function callYoutubeAPI(location){
   // }
   
 //call listeners
-function initializePage (){
+function initializePage(){
   getLocation();
   watchSearch();
   callYoutubeAPI();
