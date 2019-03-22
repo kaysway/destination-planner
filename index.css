@@ -20,7 +20,7 @@ body {
 .startDisplay {
     height: 80vh;
     padding-top: 100px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 h2 {
@@ -63,11 +63,23 @@ form {
 
 form input {
     height: 50px;
-    width: 250px;
+    width: 200px;
     padding: 10px;
     border-radius: 5px;
     border: 0px;
     box-shadow: 0 0 10px black;
+    font-size: 16px;
+}
+
+#state {
+    height: 50px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    border: 0px;
+    box-shadow: 0 0 10px black;
+    font-size: 16px;
 }
 
 form button {

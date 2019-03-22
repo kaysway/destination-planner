@@ -12,7 +12,7 @@ let results;
    map = L.map('map', {
       center: ([position.coords.latitude, position.coords.longitude]),
       layers: MQ.mapLayer(),
-      zoom: 11
+      zoom: 9
     });    
     populateMapWithoutPopup(position.coords.latitude, position.coords.longitude);
 }
@@ -43,7 +43,7 @@ function watchSearch() {
       data.results.forEach(result => {
         result.locations.forEach(location => {populateMap(location, result.providedLocation.location)});
       });
-      $('#search-form').reset();
+      $('#search-form').trigger("reset");
     });
   })
 }
@@ -86,32 +86,6 @@ function callYoutubeAPI(location){
       youtubeResult.json())
     };
 
-//Loads the IFrame Player API code asyncrhonously
-  // let tag = document.createElement('script');
-  
-  // tag.src = "https://www.youtube.com/iframe_api";
-  // var firstScriptTag = document.getElementsByTagName('script')[0];
-  // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// This function creates an <iframe> (and YouTube player) after the API code downloads.
-      // var player;
-      // function onYouTubeIframeAPIReady() {
-      //   player = new YT.Player('player', {
-      //     height: '390',
-      //     width: '640',
-      //     videoId: 'M7lc1UVf-VE',
-      //     events: {
-      //       'onReady': onPlayerReady,
-      //       'onStateChange': onPlayerStateChange
-      //     }
-      //   });
-      // }
-
-// The API will call this function when the video player is ready.
-  // function onPlayerReady(event) {
-  //   event.target.playVideo();
-  // }
-  
 //call listeners
 function initializePage(){
   getLocation();
