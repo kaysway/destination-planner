@@ -1,5 +1,5 @@
 'use strict'
-//style dropdown, validation for search input so that it can't be blank and for the dropdown must have a selection
+//add CSS for dropdown menu, add required into search-term input tags and into the <select> tags for the state dropdown menu
 
 const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
@@ -25,6 +25,7 @@ function getLocation() {
  }
 
 //GOOD-----On Search button click, scroll page to map 
+//INCOMPLETE-----Create function using panTo method from Leaflet to move map view over results from search
 function watchSearch() {
   $('#search-form').submit(function(event) {
     event.preventDefault();
@@ -50,7 +51,7 @@ function watchSearch() {
 
 // INCOMPLTE----This will populate the results on the map and add markers
 function populateMap(location, locationText) {
-  let city = $('#search-term').val();
+  let city = $('#search-term').val().trim;
   let state = $('#state option:selected').val();
   let ytURL = `https://www.youtube.com/results?search_query=best+place+to+eat+in+${city}+${state}`;
   L.marker([location.latLng.lat, location.latLng.lng], {
@@ -58,11 +59,6 @@ function populateMap(location, locationText) {
           type: 'marker',
           position: 'bottom',
           alt: locationText + 'Learn more about' + locationText + 'on YouTube',
-          // icon: {
-          //     primaryColor: '#ffffff',
-          //     secondaryColor: '#333333',
-          //     size: 'md',
-          // },
       }).bindPopup(`${locationText} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${locationText}</span> on YouTube' href=${ytURL}>YouTube</a>`).openPopup().addTo(map);
 };
 
@@ -72,11 +68,6 @@ function populateMapWithoutPopup(lat, lng) {
     text: 'Current Location',
     type: 'marker',
     position: 'bottom',
-    // icon: {
-    //     primaryColor: '#ffffff',
-    //     secondaryColor: '#333333',
-    //     size: 'md'
-    // },
 }).addTo(map);
 }
 
