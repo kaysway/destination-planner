@@ -30,37 +30,42 @@ function watchSearch() {
   $('#search-form').submit(function(event) {
     event.preventDefault();
     $('html,body').animate({scrollTop: $("#map").offset().top});
-    
+
+    let city = $('#search-term').val();
+    let state = $('#state option:selected').val();
+
     let query = { 
       key: 'R0OL2YLpWtAiZpcpqDU6MPkjAu58HLOp',
-      location: $('#search-term').val(),
+      location: city.toUpperCase() + ', ' + state.toUpperCase()
     }
 
     $.getJSON(GEO_SEARCH_URL, query, function(data) {
-      let lat = data.results[0].locations[0].latLng.lat;
-      let lng = data.results[0].locations[0].latLng.lng;
+      let location = data.results[0].locations[0];
+      let result = data.results[0];
       //call YouTube API here so the map results populate with marker from populateMap function below and a link to the YouTube search results
       callYoutubeAPI()
-      data.results.forEach(result => {
-        result.locations.forEach(location => {populateMap(location, result.providedLocation.location)});
-      });
+        populateMap(location, result.providedLocation.location);
       $('#search-form').trigger("reset");
     });
-  })
+  });
 }
 
 // INCOMPLTE----This will populate the results on the map and add markers
 function populateMap(location, locationText) {
-  let city = $('#search-term').val().trim;
+  let city = $('#search-term').val();
+  console.log(city);
   let state = $('#state option:selected').val();
-  let ytURL = `https://www.youtube.com/results?search_query=best+place+to+eat+in+${city}+${state}`;
+  console.log(state);
+  let ytURL = encodeURI(`https://www.youtube.com/results?search_query=best+place+to+eat+in+${city.toUpperCase()}+${state.toUpperCase()}`);
   L.marker([location.latLng.lat, location.latLng.lng], {
           text: locationText,
           type: 'marker',
           position: 'bottom',
           alt: locationText + 'Learn more about' + locationText + 'on YouTube',
       }).bindPopup(`${locationText} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${locationText}</span> on YouTube' href=${ytURL}>YouTube</a>`).openPopup().addTo(map);
+      map.panTo([lat, lng]);
 };
+
 
 //create a function that includes an event handler that passes locationText to call Youtube API
 function populateMapWithoutPopup(lat, lng) {
@@ -69,6 +74,7 @@ function populateMapWithoutPopup(lat, lng) {
     type: 'marker',
     position: 'bottom',
 }).addTo(map);
+
 }
 
 function callYoutubeAPI(location){
