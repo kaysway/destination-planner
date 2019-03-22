@@ -1,5 +1,4 @@
 'use strict'
-//add CSS for dropdown menu, add required into search-term input tags and into the <select> tags for the state dropdown menu
 
 const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
 const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
@@ -7,7 +6,7 @@ const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
 let map;
 let results;
 
-//GOOD-----display map on start screen when page loads
+//Display map on start screen when page loads
   function createMap(position) {
    map = L.map('map', {
       center: ([position.coords.latitude, position.coords.longitude]),
@@ -17,15 +16,15 @@ let results;
     populateMapWithoutPopup(position.coords.latitude, position.coords.longitude);
 }
   
-//GOOD-----Get user's current location and display on map
+//Get user's current location and display on map
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(createMap);
   }  
  }
 
-//GOOD-----On Search button click, scroll page to map 
-//INCOMPLETE-----Create function using panTo method from Leaflet to move map view over results from search
+//On Search button click, scroll page to map 
+//Create function using panTo method from Leaflet to move map view over results from search
 function watchSearch() {
   $('#search-form').submit(function(event) {
     event.preventDefault();
@@ -42,6 +41,7 @@ function watchSearch() {
     $.getJSON(GEO_SEARCH_URL, query, function(data) {
       let location = data.results[0].locations[0];
       let result = data.results[0];
+
       //call YouTube API here so the map results populate with marker from populateMap function below and a link to the YouTube search results
       callYoutubeAPI()
         populateMap(location, result.providedLocation.location);
@@ -50,12 +50,10 @@ function watchSearch() {
   });
 }
 
-// INCOMPLTE----This will populate the results on the map and add markers
+// This will populate the results on the map and add markers
 function populateMap(location, locationText) {
   let city = $('#search-term').val();
-  console.log(city);
   let state = $('#state option:selected').val();
-  console.log(state);
   let ytURL = encodeURI(`https://www.youtube.com/results?search_query=best+place+to+eat+in+${city.toUpperCase()}+${state.toUpperCase()}`);
   L.marker([location.latLng.lat, location.latLng.lng], {
           text: locationText,
@@ -63,7 +61,7 @@ function populateMap(location, locationText) {
           position: 'bottom',
           alt: locationText + 'Learn more about' + locationText + 'on YouTube',
       }).bindPopup(`${locationText} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${locationText}</span> on YouTube' href=${ytURL}>YouTube</a>`).openPopup().addTo(map);
-      map.panTo([lat, lng]);
+      map.panTo([location.latLng.lat, location.latLng.lng]);
 };
 
 
