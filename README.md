@@ -16,7 +16,8 @@ Homepage
 Results Page
 ![Results Page](https://github.com/kaysway/thinkful-api-capstone-destination-planner/blob/master/images/Results_Desination_Planner.png)
 
-![Popup Details]
+Popup Details
+![Popup Details](https://github.com/kaysway/thinkful-api-capstone-destination-planner/blob/master/images/Popup%20Details_Destination_Planner.png)
 
 ## Demo
 
