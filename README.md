@@ -21,6 +21,7 @@ Popup Details
 ![Popup Details](https://github.com/kaysway/thinkful-api-capstone-destination-planner/blob/master/images/Popup%20Details_Destination_Planner.png)
 
 ## Demo
+[Live App](https://kaysway.github.io/destination-planner/)
 
 ## Built With
 - HTML
