@@ -11,7 +11,7 @@ see what piques your interest while scrolling through YouTube results.
 
 ## Screenshots
 Homepage
-![Hompage]
+![Hompage](https://github.com/kaysway/thinkful-api-capstone-destination-planner/blob/master/images/Homepage_Destination_Planner.png)
 
 ![Results Page]
 
