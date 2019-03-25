@@ -19,7 +19,7 @@ see what piques your interest while scrolling through YouTube results.
 ## Demo
 
 ## Built With
--HTML
--CSS
--JavaScript
--jQuery
+- HTML
+- CSS
+- JavaScript
+- jQuery
