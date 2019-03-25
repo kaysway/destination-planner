@@ -10,6 +10,7 @@ As you begin brainstorming for your next US trip, open the Destination Planner a
 see what piques your interest while scrolling through YouTube results.
 
 ## Screenshots
+Homepage
 ![Hompage]
 
 ![Results Page]
