@@ -1,7 +1,7 @@
 'use strict'
 
 const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
-const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
+const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
 
 let map;
 let results;
