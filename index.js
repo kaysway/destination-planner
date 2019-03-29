@@ -1,7 +1,7 @@
 'use strict'
 
-const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
 const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
+const youtube_Key = "AIzaSyBIMGSvhmScS5Mjtuhbo2n8QtPAxqBjgmQ"
 
 let map;
 let results;
@@ -23,8 +23,7 @@ function getLocation() {
   }  
  }
 
-//On Search button click, scroll page to map 
-//Create function using panTo method from Leaflet to move map view over results from search
+//On Search button click, scroll page to map and get json data from Mapquest API
 function watchSearch() {
   $('#search-form').submit(function(event) {
     event.preventDefault();
@@ -42,7 +41,7 @@ function watchSearch() {
       let location = data.results[0].locations[0];
       let result = data.results[0];
 
-      //call YouTube API here so the map results populate with marker from populateMap function below and a link to the YouTube search results
+      //map results populate with marker from populateMap function below and the form resets
       callYoutubeAPI()
         populateMap(location, result.providedLocation.location);
       $('#search-form').trigger("reset");
@@ -50,7 +49,7 @@ function watchSearch() {
   });
 }
 
-// This will populate the results on the map and add markers
+// This will populate the search result on the map, add the marker, and set the text inside the popup with a link to search results on YouTube
 function populateMap(location, locationText) {
   let city = $('#search-term').val();
   let state = $('#state option:selected').val();
@@ -65,7 +64,7 @@ function populateMap(location, locationText) {
 };
 
 
-//create a function that includes an event handler that passes locationText to call Youtube API
+//function to populate map without popup which is called in the creatMap function when user allows their location to be used
 function populateMapWithoutPopup(lat, lng) {
   L.marker([lat, lng], {
     text: 'Current Location',
@@ -75,6 +74,7 @@ function populateMapWithoutPopup(lat, lng) {
 
 }
 
+//dynamically generate the YouTube URL inside popup for location results
 function callYoutubeAPI(location){
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=where+to+eat+in+${location}+best+restaurants&maxResults=1&&safeSearch=moderate&key=${youtube_Key}`)
     .then(youtubeResult =>
