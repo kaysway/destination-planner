@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Roboto, sans-serif;
 }
 
 body {
@@ -21,15 +22,28 @@ body {
     height: 80vh;
     padding-top: 100px;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    resize: vertical;
+    overflow: auto;
+    align-content: center;
+    align-items: center;
 }
 
 h2 {
-    color: rgb(109, 27, 218);
-    font-size: 24px;
+    text-align: center;
+    color: rgb(3, 32, 110);
+    font-size: 18px;
+    font-family:  Arial;
 }
 
 header p {
     font-size: 18px;
+}
+
+fieldset{
+    border: 0;
 }
 
 header p.api-info {
@@ -38,7 +52,9 @@ header p.api-info {
 }
 
 header {
-    background-color: rgba(233, 223, 223, 0.7);
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 10px black;
     padding: 10px;
     border-radius: 10px;
     width: 80%
@@ -46,6 +62,8 @@ header {
 
 h1.logo {
     font-size: 50px;
+    color: rgb(53, 69, 114);
+
 }
 
 .mapHeader {
@@ -53,9 +71,9 @@ h1.logo {
     padding: 3px;
     border-radius: 10px;
     width: 30%;
-    background-color: rgba(233, 223, 223, 0.7);
+    background-color: white;
+    box-shadow: 0 0 10px black;
 }
-
 
 form {
     padding: 30px;
@@ -94,10 +112,12 @@ form button {
 }
 
 #map {
+    text-align: center;
     height: 400px;
     width: 700px;
     margin: 0 auto;
     box-shadow: 0 0 10px black;
+    max-width: 100%;
   }
 
 /* FOOTER */
@@ -108,15 +128,11 @@ footer {
     padding: 20px;
     margin-top: 20px;
     box-shadow: 0 0 10px black;
+    text-align: center;
 }
 
 
 /* RESPONSIVE DESIGN */
-
-* {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
 
 .row {
     max-width: 1000px;

@@ -49,6 +49,11 @@ function watchSearch() {
   });
 }
 
+// !!!!!!!!!!!!!!!!!!!!!!This will show the error message when the geo locaiton isn't available
+// function showError(error){
+//   $('#search-term').val()
+// }
+
 // This will populate the search result on the map, add the marker, and set the text inside the popup with a link to search results on YouTube
 function populateMap(location, locationText) {
   let city = $('#search-term').val();
