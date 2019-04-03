@@ -49,11 +49,6 @@ function watchSearch() {
   });
 }
 
-// !!!!!!!!!!!!!!!!!!!!!!This will show the error message when the geo locaiton isn't available
-// function showError(error){
-//   $('#search-term').val()
-// }
-
 // This will populate the search result on the map, add the marker, and set the text inside the popup with a link to search results on YouTube
 function populateMap(location, locationText) {
   let city = $('#search-term').val();
@@ -63,6 +58,7 @@ function populateMap(location, locationText) {
           text: locationText,
           type: 'marker',
           position: 'bottom',
+          className: 'popupCustom',
           alt: locationText + 'Learn more about' + locationText + 'on YouTube',
       }).bindPopup(`${locationText} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${locationText}</span> on YouTube' href=${ytURL}>YouTube</a>`).openPopup().addTo(map);
       map.panTo([location.latLng.lat, location.latLng.lng]);
@@ -75,6 +71,7 @@ function populateMapWithoutPopup(lat, lng) {
     text: 'Current Location',
     type: 'marker',
     position: 'bottom',
+    // className: 'popupCustom'
 }).addTo(map);
 
 }

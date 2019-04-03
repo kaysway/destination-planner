@@ -120,6 +120,10 @@ form button {
     max-width: 100%;
   }
 
+.popupCustom {
+    color: #9932CC;
+}
+
 /* FOOTER */
 
 footer {
