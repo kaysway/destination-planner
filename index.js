@@ -40,11 +40,15 @@ function watchSearch() {
     $.getJSON(GEO_SEARCH_URL, query, function(data) {
       let location = data.results[0].locations[0];
       let result = data.results[0];
-
-      //map results populate with marker from populateMap function below and the form resets
-      callYoutubeAPI()
+      if (location.adminArea5.toUpperCase() != city.toUpperCase()) {
+        alert("City/state combination does not exist")
+      }
+      else {
+        //map results populate with marker from populateMap function below and the form resets
+        callYoutubeAPI()
         populateMap(location, result.providedLocation.location);
-      $('#search-form').trigger("reset");
+        $('#search-form').trigger("reset");
+      } 
     });
   });
 }
@@ -58,7 +62,7 @@ function populateMap(location, locationText) {
           text: locationText,
           type: 'marker',
           position: 'bottom',
-          className: 'popupCustom',
+          // className: 'popupCustom',
           alt: locationText + 'Learn more about' + locationText + 'on YouTube',
       }).bindPopup(`${locationText} <br><a class="markerPopup" target='_blank' aria-label='Read more about <span class="cityName">${locationText}</span> on YouTube' href=${ytURL}>YouTube</a>`).openPopup().addTo(map);
       map.panTo([location.latLng.lat, location.latLng.lng]);
